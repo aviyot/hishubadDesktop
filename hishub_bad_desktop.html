@@ -1,0 +1,728 @@
+<!doctype html>
+<html>
+<head>
+<style type="text/css">
+
+:root {
+--fontSize:large;
+--b2pxso:2px solid red;
+}
+
+* {
+box-sizing:border-box;
+}
+body,html{
+position:relative;
+background-color:black;
+    height: 100%;
+}
+
+#mainApp {
+position:relative;
+width:100%;
+height:100%;
+background-color:gray;
+//overflow:hiden;
+//padding:5px;
+//display:flex;
+}
+
+#tfiraOption {
+position:absolute;
+//margin-bottom:10px;
+//margin:0px 5px 0px 5px;
+top:5px;
+height:10%;
+background-color:orange;
+font-size:large;
+width:100%;
+}
+
+#userData{
+position:absolute;
+height:80%;
+top:12%;
+left:0px;
+box-sizing:border-box;
+//margin-top:10px;
+display:flex;
+flex-direction:column;
+//padding:5px;
+background-color:blue;
+justify-content:space-between;
+overflow:auto;
+width:30%;
+}
+
+
+#sheeritTable {
+width:30%;
+height:80%;
+position:relative;
+top:12%;
+    left: 65%;
+//display:none;
+//padding:10px;
+background-color:coral;
+overflow:auto;
+}
+
+#tfiraTable {
+background-color:LightSlateGrey;
+//margin-bottom:10px;
+}
+#galilTable  {
+background-color:LightGray;
+//margin-bottom:10px;
+}
+#volanSharvolTable  {
+background-color:LightGray;
+//margin-bottom:10px;
+}
+#sizeTable  {
+background-color:LightGray;
+//margin-bottom:10px;
+}
+
+#orehTable {
+//display:none;
+    
+//padding:10px;
+background-color:Crimson;
+position:absolute;
+top:12%;
+    left:33%;
+
+width:30%;
+height:80%;
+overflow:auto;
+}
+    
+#saveOreh{
+position:absolute;
+bottom:0px;
+left:0px;
+width:40%;
+}
+#restBtn{
+position:absolute;
+bottom:0px;
+right:0px;
+width:40%;
+}
+
+
+td ,th {
+padding:5px
+}
+
+th { 
+border-bottom:1px solid black;
+}
+
+
+input {
+width:100%;
+font-size:var(--fontSize);
+text-align:center;
+margin:2px;
+}
+
+
+#sheeritTable tr td:last-child,
+#sheeritTable tr th:last-child{
+//display:none;
+//color:red;
+}
+
+
+#orehTable tr,#sheeritTable tr{
+height:50px;
+}
+
+#userData td{
+width:25%;
+}
+
+#userData table {
+border:2px solid Azure;
+}
+
+
+.sher input{
+height:15px;
+width:15px;
+}
+
+table {
+border-collapse:collapse;
+}
+table,th,td {
+//border:1px solid red;
+}
+
+tr:nth-child(even) {
+
+}
+#buttons{
+display:flex;
+position:absolute;
+justify-content:center;
+align-items:center;
+//margin-top:10px;
+bottom:3px;
+background-color:orange;
+width:100%;
+
+}
+
+#hashebOreh {
+background-color:Crimson;
+}
+
+#hashebSheeritBtn  {
+background-color:Coral;
+}
+
+#showUserData  {
+background-color:blue;
+}
+
+#buttons button{
+width:30%;
+color:white;
+}
+
+button{
+margin:0px;
+padding:5px;
+font-size:large;
+flex-grow:1;
+
+}
+#OrehDiv{
+position:absolute;
+top:0px;
+font-size:large;
+background-color:azure;
+width:60%;
+height:75%;
+overflow:scroll;
+
+}
+#totalOrehDiv{
+position:absolute;
+bottom:15%;
+width:60%;
+//right:0px;
+color:white;
+font-size:x-large;
+left:0px;
+background-color:blue;
+}
+input:focus {
+background-color:lightblue;
+}
+
+li,ol{
+margin:0px;
+padding:1px;
+}
+  
+#savedData{
+position:absolute;
+background-color:blue;
+width:66%;
+bottom:0%;
+left:0px;
+color:white;
+font-size:x-large;
+}
+
+
+
+#deleteLast{
+position:absolute;
+top:0px;
+right:0px;
+width:30%;
+height:20%;
+}
+
+#clearSaved  {
+position:absolute;
+bottom:0;
+right:0;
+width:30%;
+height:20%;
+}
+#listOreh  {
+background-color:yellow;
+
+}
+
+li { 
+color:red;
+
+}
+
+</style>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"K>
+</head>
+
+<body >
+
+<div id="mainApp">
+
+ <select id="tfiraOption" autofocus="autofocus"  onchange="selectChoice()">
+ <option value="plata">PLATA</option>
+ <option value="plataWithKant">PLATA WITH KANT</option>
+ <option value="awings" selected="selected" >AWINGS</option>
+ <option value="awingsWithVolan">AWINGS WITH VOLAN</option>
+ <option value="nofelet">NOFELET</option>
+ <option value="nofeletWithVolan">NOFELET With Volan</option>
+ </select>
+ 
+<div  id="userData"> 
+
+<table  id="tfiraTable">
+<tr>
+    <th>Kant</th>
+    <th>Hibur</th>
+    <th>Hebel</th>    
+</tr>
+<tr >
+    <td><input type ="number" id = "kant"  value ="70" list="kantList"></td>
+    <td><input type ="number" id = "hibur" value ="25" ></td>
+    <td><input type ="number" id = "hebel"  value ="50"  list="hebelList"></td>
+</tr>
+</table>
+
+
+
+<table  id ="galilTable">
+<tr>
+    <th>Name</th>
+    <th>Width</th>
+    <th>Size(M)</th>
+</tr>
+<tr >
+    <td></td>
+    <td><input type ="number" id = "rohabBad" value ="1200" " placeholder="width" list="widthList"></td>
+    <td><input type ="number" id = "orehGalil"  value ="60" ></td>
+</tr>
+</table>
+
+
+
+<table id="sizeTable">
+<tr>
+    <th>Length</th>
+    <th>Width</th>
+    <th>
+    <div class="sher">
+       pice:
+    <input type="checkbox" id="exitSheerit">   
+    </div>    
+    </th>
+</tr>
+
+<tr >
+    <td><input type ="number" id="orehMida" list="orehList"></td>
+    <td><input type ="number" id = "rohabMida" list ="rohabList" ></td>
+    <td><input type ="number" id="mySherit" value ="0" > </td>
+</tr>
+</table>
+
+
+
+<table id="volanSharvolTable">
+<tr>
+    <th>volan</th>
+    <th>sug-v</th>
+    <th>sharvul</th>
+</tr>
+<tr >
+    <td><input type ="number" id="volan" value="0" list="volanList" ></td>
+    <td><select id ="sugGali">
+          <option value = "gali">GALI</option>
+          <option value ="kipul" selected="selected">KIPUL</option>
+          <option value ="seret"> SERET</option>
+         </select>
+    </td>
+    <td><input type ="number" id="sharvul" value ="0"  list="sharvulList"> </td>
+</tr>
+</table>
+
+
+</div>
+  
+ 
+ 
+       <table  id ="sheeritTable">
+       <tr >
+         <th>OP</th>    
+         <th>Rohabim</th>
+         <th>IN</th>
+         <th>OUT</th>
+       </tr>
+       
+       <tr>
+        <td> #1</td>
+        <td class="sh"></td>
+        <td class ="sheeritIn"></td>
+        <td class ="sheeritOut"></td>
+       </tr>
+       
+       <tr>
+        <td> #2</td>
+        <td class="sh"></td>
+        <td class="sheeritIn"></td>
+        <td class ="sheeritOut"></td>
+       </tr>
+       
+       <tr> 
+       <td> #3</td>     
+       <td class="sh"></td>
+       <td class = "sheeritIn"></td>
+       <td class ="sheeritOut"></td>
+       </tr>
+       
+       <tr>
+       <td> #4</td>
+       <td class="sh"></td>
+       <td class ="sheeritIn"></td>
+       <td class ="sheeritOut"></td>
+       </tr>
+       
+      </table>     
+                                
+     
+     <div id ="orehTable">
+           <div id="orehDiv">
+           oreh:
+           <ol id = "oreh">             
+           </ol> 
+               
+           </div> 
+            
+            <div id="totalOrehDiv">  
+            total :    <label id ="totalOreh">0</label>          
+            </div>
+                    <div id ="savedData">0</div>
+
+           <button id="deleteLast" 
+            onclick="deleteLast()">
+        
+           Delete Last
+           </button>
+         <button id="clearSaved"
+             onclick="clearSaved()" > Clear Saved </button>
+          <button id="saveOreh"
+          onclick ="save()">Save
+         </button> 
+       
+         <button id = "restBtn"   
+           onclick="restTotalOreh()">Rest Oreh         
+         </button>        
+       </div>
+ </div>
+
+ <div id = "buttons"> 
+ <button id="hashebSheeritBtn" 
+ onclick ="sherit()"> SHERIT</button> 
+ <button id="showUserData" onclick="showUserData()"> DATA</button>
+ <button id = "hashebOreh"
+ onclick ="orehFun()">OREH</button> 
+ </div> 
+
+
+  <datalist id="orehList">
+   <option value="2000">
+   <option value="2250">
+   <option value="2500">
+   <option value="2750">
+   <option value="3000">
+   <option value="3250">
+   <option value="3500">
+   <option value="3750">
+   <option value="4250">
+  </datalist>
+
+  <datalist id="rohabList">
+   <option value="2870">
+   <option value="3370">
+   <option value="3870">
+   <option value="4070">
+   <option value="4370">
+   <option value="5370">
+  </datalist>
+  
+  
+  <datalist id="volanList">
+  <option value="0" >
+  <option value="200">
+  <option value="250">
+  <option value="300">
+  </datalist>
+  
+  
+  <datalist id="widthList">
+  <option value="1200">
+  <option value="1205">
+  <option value="1500">
+  </datalist>
+ 
+  <datalist id="orehGalilList">
+  <option value="0" >
+  <option value="50">
+  <option value="60">
+  </datalist>
+  
+  
+  <datalist id="hebelList">
+  <option value="0" >
+  <option value="30">
+  <option value="50">
+  </datalist>
+  
+  
+  <datalist id="sharvulList">
+  <option value="0" >
+  <option value="50">
+  <option value="70">
+  <option value="100">
+  </datalist>
+  
+  
+  
+  
+  
+  
+  <datalist id="kantList">
+  <option value="0" >
+  <option value="50">
+  <option value="70">
+  </datalist>
+  
+  
+
+  
+  
+  
+
+
+
+<script type="text/javascript">
+var hibur;
+var kant ;
+var hebel;
+var totalOreh = 0;
+var volan;
+var oreh = 0;
+var mySherit;
+var rohabBad;
+var rohabMida;
+var orehMida;
+var rohabimSleminAndSheerit;
+var shelem;
+var sher;
+var kipulHebel=30;
+var sharvul;
+var orehGalil;
+
+
+    
+function getData (){
+
+mySherit =  Number(document.getElementById("mySherit").value);
+rohabMida = Number(document.getElementById("rohabMida").value);
+rohabBad =  Number(document.getElementById("rohabBad").value);
+orehMida =  Number(document.getElementById("orehMida").value);
+volan =     Number(document.getElementById("volan").value);
+sharvul =   Number(document.getElementById("sharvul").value);
+hibur =     Number(document.getElementById("hibur").value);
+orehGalil = Number(document.getElementById("orehGalil").value);
+kant =      Number(document.getElementById("kant").value);
+hebel=      Number(document.getElementById("hebel").value);
+
+
+rohabimSleminAndSheerit = (rohabMida+kant-mySherit)/(rohabBad-hibur);
+shelem = Math.floor(rohabimSleminAndSheerit);
+sher = Math.round((rohabimSleminAndSheerit-shelem)*(rohabBad-hibur));
+
+}
+
+function selectChoice() {
+
+var choiceTfira = document.getElementById("tfiraOption").value;
+
+switch (choiceTfira) {
+
+case "plata":
+Number(document.getElementById("kant").value = 0)
+Number(document.getElementById("hebel").value = 0);
+
+break;
+
+case "plataWithKant":
+Number(document.getElementById("kant").value = 70);
+Number(document.getElementById("hebel").value = 50);
+break;
+
+case "awings":
+Number(document.getElementById("kant").value = 70);
+Number(document.getElementById("hebel").value = 50);
+break;
+
+case "awingsWithVolan":
+Number(document.getElementById("kant").value = 70);
+Number(document.getElementById("hebel").value = 50);
+break;
+
+case "nofelet":
+Number(document.getElementById("kant").value = 70);
+Number(document.getElementById("hebel").value = 50);
+break;
+
+case "nofeletWithVolan":
+Number(document.getElementById("kant").value = 70);
+Number(document.getElementById("hebel").value = 50);
+break;
+}
+
+}
+
+
+function sherit(){
+getData ();
+        /*
+document.getElementById("userData").style.display="none";
+document.getElementById("sheeritTable").style.display = "block";
+document.getElementById("orehTable").style.display = "none";
+document.getElementById("showUserData").style.display="block";
+*/
+    
+//$("ol").hide();   
+
+if(mySherit > 0)
+sher = sher + hibur;
+ 
+document.getElementsByClassName("sh")[0].innerHTML = rohabBad + " X "+ shelem;
+document.getElementsByClassName("sh")[1].innerHTML = rohabBad + " X "+ shelem;
+document.getElementsByClassName("sh")[2].innerHTML = rohabBad + " X "+ (shelem-1);
+document.getElementsByClassName("sh")[3].innerHTML = " ----";
+
+document.getElementsByClassName("sheeritIn")[0].innerHTML = sher;
+document.getElementsByClassName("sheeritOut")[0].innerHTML = rohabBad-sher;
+
+document.getElementsByClassName("sheeritIn")[1].innerHTML = (sher+hibur)/2+" X 2";
+document.getElementsByClassName("sheeritOut")[1].innerHTML = rohabBad-(sher+hibur)/2 + " X 2";
+
+document.getElementsByClassName("sheeritIn")[2].innerHTML = (sher+rohabBad)/2 + " X 2";
+document.getElementsByClassName("sheeritOut")[2].innerHTML = rohabBad-(sher+rohabBad)/2 + " X 2";
+document.getElementsByClassName("sheeritIn")[3].innerHTML = ((rohabMida+shelem*hibur+kant)/(shelem+1)).toFixed(1) +" X " +(shelem+1);
+document.getElementsByClassName("sheeritOut")[3].innerHTML = (rohabBad-(rohabBad*shelem+sher)/(shelem+1)).toFixed(1) + " X 2";
+
+
+}
+
+function orehFun(){
+
+getData ();
+/*
+document.getElementById("orehTable").style.display="block";
+document.getElementById("sheeritTable").style.display="none";
+document.getElementById("userData").style.display="none";
+document.getElementById("showUserData").style.display="block";
+*/
+var one=0;
+if (sher  > 25)
+one = 1;
+
+var tmpShalem = shelem;
+if(document.getElementById("exitSheerit").checked == true)
+ tmpShalem--;
+
+var tfiraOption = document.getElementById("tfiraOption").value;
+
+if (orehMida > 0){
+
+if (tfiraOption=="plata" )
+     oreh = (orehMida)*(tmpShalem+one) ;
+     
+if (tfiraOption=="awings") 
+  {
+ 
+    if (volan > 0){
+     if (document.getElementById("sugGali").value=="kipul")
+      oreh = (orehMida+volan+kipulHebel+hebel*3)*(tmpShalem+one) ;
+    else
+      oreh = (orehMida+volan+hebel*3)*(tmpShalem+one) ;  
+     }
+
+    else
+      oreh = (orehMida+ hebel*2)*(tmpShalem+one) ;
+}
+
+     
+if (tfiraOption =="nofelet")
+     oreh = (orehMida+ hebel+sharvul+kipulHebel)*(tmpShalem+one) ;
+     
+if (tfiraOption=="nofeletWithVolan" ){
+         if (document.getElementById("sugGali").value=="kipul")
+         oreh = (orehMida+ hebel*2+sharvul+kipulHebel+volan)*(tmpShalem+one) ;
+         else
+         oreh = (orehMida+ hebel*2+sharvul+volan)*(tmpShalem+one) ;
+         
+    }
+}
+
+
+var x = ((oreh)/(tmpShalem+one))/1000;
+
+totalOreh = totalOreh + oreh;
+var nodeLi=document.createElement("LI");
+var tx=document.createTextNode(x+" X " + (tmpShalem+ one) + " = " + (oreh/1000)+"M");
+nodeLi.appendChild(tx);
+document.getElementById("oreh").appendChild(nodeLi);
+document.getElementById("totalOreh").innerHTML = (totalOreh/1000)+"M";
+
+}
+
+function restTotalOreh(){
+totalOreh = 0;
+document.getElementById("totalOreh").innerHTML = (totalOreh/1000)+"M";
+}
+
+
+   function showUserData()
+      {
+                 document.getElementById("userData").style.display="flex";
+               //  document.getElementById("sheeritTable").style.display="none";
+                // document.getElementById("orehTable").style.display="none";
+                // document.getElementById("showUserData").style.display="none";  
+      }
+      
+  function save(){ 
+  document.getElementById("orehGalil").value =  
+  (Number ( document.getElementById("orehGalil").value)-(totalOreh/1000)).toFixed(2);
+  
+  }
+  
+  function deleteLast (){
+    var lastNode = 
+     document.getElementById("oreh");
+     lastNode.removeChild(lastNode.lastChild);
+  }
+          function clearSaved() {
+     saveData = 0;
+     document.getElementById("savedData").innerHTML= "Saved: " + (saveData/1000);
+   }
+</script>
+
+</body>
+
+</html>
